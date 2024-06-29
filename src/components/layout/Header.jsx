@@ -14,7 +14,8 @@ const Header = (props) => {
 };
 
 const Container = styled.header`
-  width: 1200px;
+  /* width: 1200px; */
+  width: 100%;
   height: 70px;
   position: fixed;
   top: 0;

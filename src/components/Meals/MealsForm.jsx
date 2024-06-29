@@ -3,6 +3,7 @@ import Input from "../UI/Input";
 import Button from "../UI/Button";
 import styled from "styled-components";
 import { OrderBusketContext } from "../store/OrderBusket";
+import { useDispatch } from "react-redux";
 
 const FormMeals = styled.div`
   display: flex;
@@ -24,6 +25,7 @@ const InputWithTitle = styled.div`
 
 function MealsForm(props) {
   const context = useContext(OrderBusketContext);
+  const dispatch = useDispatch()
 
   const [amount, setAmount] = useState(1);
 
@@ -39,6 +41,8 @@ function MealsForm(props) {
       id: props.id,
     };
     context.saveNewData(newObj);
+    dispatch({type: "ADD", payload: newObj})
+
   };
 
   const add = "Саны"

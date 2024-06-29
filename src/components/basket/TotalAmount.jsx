@@ -2,12 +2,13 @@ import React, { useContext } from "react";
 import Button from "../UI/Button";
 import styled from "styled-components";
 import { OrderBusketContext } from "../store/OrderBusket";
-import Modal from "./Modal";
+import { useDispatch, useSelector } from "react-redux";
+import Modal from "../UI/Modal";
 
 const CancelWithOrder = styled.div`
   display: flex;
   justify-content: space-around;
-  width: 700px;
+  /* width: 700px; */
 `;
 const AreYouSure = styled.div`
   & div {
@@ -18,6 +19,8 @@ const AreYouSure = styled.div`
 
 function TotalAmount({ setState, onclose }) {
   const context = useContext(OrderBusketContext);
+  const dispatch = useDispatch()
+  const {modal} = useSelector((prev)=>prev)
 
   const totalPrice = context.items.reduce((a, el) => {
     return a + el.price * el.amount;
@@ -48,12 +51,14 @@ function TotalAmount({ setState, onclose }) {
       <hr />
       <br />
       <CancelWithOrder>
-        <Button onClick={onclose} height="45px">
+        <Button onClick={()=>{dispatch({type:"CLOSE"})}} height="45px">
           Cancel
         </Button>
         {totalPrice > 0 && <Button height="45px">Order</Button>}
       </CancelWithOrder>
-      {context.modalAreYouSure.isLoading && (
+
+      {modal && <Modal variant="standart" >Are you sure you to want?</Modal>}
+      {/* {context.modalAreYouSure.isLoading && (
         <Modal width="300px" left="580px" top="220px">
           <AreYouSure>
             <h2>Are you sure, you want to delete ?</h2>
@@ -75,7 +80,7 @@ function TotalAmount({ setState, onclose }) {
             </div>
           </AreYouSure>
         </Modal>
-      )}
+      )} */}
     </div>
   );
 }

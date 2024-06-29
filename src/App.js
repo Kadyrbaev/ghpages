@@ -1,22 +1,16 @@
 import { useState } from "react";
 import "./App.css";
-import Modal from "./components/basket/Modal";
 import Header from "./components/layout/Header";
 import Main from "./components/layout/Main";
 import BaskedFood from "./components/basket/BaskedFood";
+import Modal from "./components/basket/Modal";
 import TotalAmount from "./components/basket/TotalAmount";
 import { OrderProvider } from "./components/store/OrderBusket";
 import Forma from "./components/form/Forma";
+import { useSelector } from "react-redux";
 
 function App() {
-  <h1>Branch "DEVELOPER_1"</h1>
-  const [state, setState] = useState(false);
-  const openModalHAndle = () => {
-    setState(true);
-  };
-  const closeModalHAndle = () => {
-    setState(false);
-  };
+  const {state} = useSelector((prev)=>prev.basket)
 
   const body = document.querySelector("body");
   if (state) {
@@ -27,19 +21,23 @@ function App() {
 
   const [form, setForm] = useState(false)
 
+
+
+
   return (
     <div className="App">
       <OrderProvider>
-          <Header openBusket={openModalHAndle} />
+          <Header/>
           <Main />
           {state && (
-            <Modal top="150px" left="380px" onclose={closeModalHAndle}>
+            <Modal top="150px" left="380px">
               {!form && <BaskedFood />}
-              {!form && <TotalAmount setState={setState} onclose={closeModalHAndle} />}
+              {!form && <TotalAmount/>}
               {form && <Forma />}
             </Modal>
           )}
       </OrderProvider>
+
     </div>
   );
 }

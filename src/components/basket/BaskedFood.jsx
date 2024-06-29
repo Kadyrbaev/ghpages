@@ -1,13 +1,18 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import { OrderBusketContext } from "../store/OrderBusket";
+import { useDispatch, useSelector } from "react-redux";
 
 function BaskedFood() {
   const context = useContext(OrderBusketContext);
+  const {basket} = useSelector((prev)=>prev.basket)
+  const dispatch = useDispatch()
+  console.log(basket);
+  console.log("BASKET");
 
   return (
     <Global>
-      {context.items.map((el) => {
+      {basket.map((el) => {
         return (
           <>
             <Wrapper>
@@ -19,8 +24,8 @@ function BaskedFood() {
                 <Amount>{el.amount}</Amount>
               </Container>
               <Buttons>
-                <button onClick={() => context.counterPlus(el.id)}>+</button>
-                <button onClick={() => context.counterMinus(el.id)}>-</button>
+                <button onClick={() => dispatch({type: "PLUS", payload: el.id})}>+</button>
+                <button onClick={() => dispatch({type: "MINUS", payload: el.id})}>-</button>
               </Buttons>
             </Wrapper>
           </>
@@ -35,6 +40,7 @@ export default BaskedFood;
 const Global = styled.div`
   overflow-x: hidden;
   max-height: 200px;
+  border: 2px solid red;
 `
 const Wrapper = styled.div`
   padding: 10px;

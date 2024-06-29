@@ -3,14 +3,20 @@ import styled from "styled-components";
 import OrderBusket from "../assets/icons/OrderBasket.png";
 import { OrderBusketContext } from "../store/OrderBusket";
 import "./ButtonOrderBusket.css";
+import { useDispatch } from "react-redux";
 
 const ButtonOrderBusket = ({ openBusket }) => {
   const context = useContext(OrderBusketContext);
+  const dispatch = useDispatch()
   const total = context.items.reduce((a, el) => {
     // console.log(a + el.amount);
     // <--------      Без понятие    -----------> //
     return a + el.amount;
   }, 0);
+
+  const showBasket=()=>{
+    dispatch({type: "SHOW"})
+  }
 
   return (
     <div
@@ -23,7 +29,7 @@ const ButtonOrderBusket = ({ openBusket }) => {
       }
     >
       <ContainerBusket>
-        <BusketImage onClick={openBusket} src={OrderBusket} alt="OrderBusket" />
+        <BusketImage onClick={showBasket} src={OrderBusket} alt="OrderBusket" />
         <p>Your Orders</p>
         <Count>{total || 0}</Count>
       </ContainerBusket>
