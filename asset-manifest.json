@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/ghpages/static/css/main.800f81c2.css",
+    "main.js": "/ghpages/static/js/main.05512c2d.js",
+    "static/media/mainImg.avif": "/ghpages/static/media/mainImg.bdba7cd5fcc47d39f358.avif",
+    "index.html": "/ghpages/index.html",
+    "main.800f81c2.css.map": "/ghpages/static/css/main.800f81c2.css.map",
+    "main.05512c2d.js.map": "/ghpages/static/js/main.05512c2d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.800f81c2.css",
+    "static/js/main.05512c2d.js"
+  ]
+}
